@@ -32,3 +32,48 @@ ChatGPT's foundation is the Transformer architecture, but it only utilizes the d
 zero shot prompting - no clue
 one shot prompting - one example given
 multi shot prompting - many samples given
+
+
+chatGPT - is a product with UI etc (with llm behind it)
+cloudAPIs - managed LLMs like bedrock from amazon, vertex from google etc. (we call bedrock and bedrock calls the llms)
+frameworks like langchain.
+open source - hugging face transformers library || ollama (ollama is for fixed packaged open source models, very specific versions.)
+
+Ollama is hosted on a server.
+ollama pull <modelname>
+
+1. direct API call
+
+response = requests.post(OLLAMA_API, json=payload, headers=HEADERS)
+print(response.json()['message']['content'])
+
+OLLAMA_API = "http://localhost:11434/api/chat"
+HEADERS = {"Content-Type": "application/json"}
+MODEL = "llama3.2"
+
+messages = [
+    {"role": "user", "content": "Describe some of the business applications of Generative AI"}
+]
+payload = {
+        "model": MODEL,
+        "messages": messages,
+        "stream": False
+    }
+
+response = requests.post(OLLAMA_API, json=payload, headers=HEADERS)
+print(response.json()['message']['content'])    
+
+2. openai python sdk package for ollama
+
+
+from openai import OpenAI
+ollama_via_openai = OpenAI(base_url='http://localhost:11434/v1', api_key='ollama') #initialise
+
+response = ollama_via_openai.chat.completions.create(
+    model=MODEL,
+    messages=messages
+)
+
+print(response.choices[0].message.content)
+
+- Extend the same api and use different base url. and use ollama or qwen.
