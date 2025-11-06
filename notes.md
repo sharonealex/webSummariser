@@ -42,7 +42,7 @@ open source - hugging face transformers library || ollama (ollama is for fixed p
 Ollama is hosted on a server.
 ollama pull <modelname>
 
-1. direct API call
+1. direct API call (if wanting local Ollama run onlocal host, else use remote url of openAI/bed rock)
 
 response = requests.post(OLLAMA_API, json=payload, headers=HEADERS)
 print(response.json()['message']['content'])
@@ -77,3 +77,21 @@ response = ollama_via_openai.chat.completions.create(
 print(response.choices[0].message.content)
 
 - Extend the same api and use different base url. and use ollama or qwen.
+
+originally API model was different for different models.
+Later they also followed openAPIs schema.
+Anthropic was most hesistant.
+
+
+There is a small language model of deepseek (1.5B parameter). based of qwen from alibaba. 
+But real full size deepseekd is 600B parameter (needs about 400GB of data)
+
+What we knows now:
+1, I know how to use Ollama to locally run different models on my machine.
+
+2. I know to write code to call OpenAI's frontier models and get chats.completions. reposne.
+
+3. I know to distinguish between system and user prompt.
+
+4. I can summarize any commercial problem.
+
