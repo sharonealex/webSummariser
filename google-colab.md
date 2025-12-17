@@ -11,7 +11,10 @@ When working with Data Science models, you could be carrying out 2 very differen
 . Training
 Training is when you provide a model with data for it to adapt to get better at a task in the future. It does this by updating its internal settings - the parameters or weights of the model. If you're Training a model that's already had some training, the activity is called "fine-tuning".
 
-Inference is when you are working with a model that has already been trained. You are using that model to produce new outputs on new inputs, taking advantage of everything it learned while it was being trained. Inference is also sometimes referred to as "Execution" or "Running a model".
+Inference is: (new input)
+ when you are working with a model that has already been trained. You are using that model to produce new outputs on new inputs, taking advantage of everything it learned while it was being trained. Inference is also sometimes referred to as "Execution" or "Running a model".
+
+ Hugging Face Pipeline API is all about inference. (Because its already trained)
 
 All of our use of APIs for GPT, Claude and Gemini in the last weeks are examples of inference. The "P" in GPT stands for "Pre-trained", meaning that it has already been trained with data (lots of it!)
 
@@ -60,6 +63,26 @@ Text To Speech model
 you want it - who am i to hold that back from you?
 
 
+
+
+Tokeniser maps between natural language text and tokens for a particular mdoel.
+
+- translation happens via encode and decode methods.
+- contains a vocab that can include special tokens to signal information to the LLM. like start of a prompt.
+
+Different models have diff types of tokensier that is the usp.
+Meta has llama tokeniser eg
+
+Qwen 2.5 is the LEADING coder model.
+
+Accepting terms of service with different models.
+
+
+All statistical models understand only numbers - so we have to input everything in number. which is the Token ID.
+
+static classes tokeniser:
+so encoders take text and return us "text ids as numbers"
+
 encoding and decoding with tokenizers.
 different models have different types of tokenizer meaning they break words into different types of chunks
 eg: coconut= co + co + nut
@@ -69,6 +92,20 @@ this is specific to the model itslef. And how they assign ids to each token chun
 
 <beginningOfText>
 <endofText>
+<reserved_special_Token>
+
+Each model has a vocab like this with all the tokens- and we can see the size of this models tokeniser.
+
+
+There are 3 models
+1. base model (doesnt expect system and user prompt - fairly blank cavas ready for us to take in a diff direction)
+2. chat model - specifically trainied with all sorts of prompts  -Hugging face refers to these as "instruct variants". "Apply Chat Template" 
+3. reasoning model.
+
+wait - its going to land for you. let me show you.
+
+tonnes and tonnes of system and user prompts have been fed into it - and the statistical models simply look the corelated pattern matching the token numbers. (this is the magic)
+
 
 So hugging face gives us access to all the tokenizers (low level API). (converting words to numbers) 
 
